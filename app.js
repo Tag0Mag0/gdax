@@ -1,4 +1,3 @@
-const assert = require('assert'); // N.B: Assert module comes bundled with Node.js.
 const dotenv = require('dotenv');
 const Gdax = require('gdax');
 
@@ -12,7 +11,6 @@ const key = sandbox ? process.env.GDAX_SANDBOX_API_KEY : process.env.GDAX_API_KE
 const b64secret = sandbox ? process.env.GDAX_SANDBOX_API_SECRET : process.env.GDAX_API_SECRET;
 const passphrase = sandbox ? process.env.GDAX_SANDBOX_API_PASSPHRASE : process.env.GDAX_API_PASSPHRASE;
 
-// defaults to `BTC-USD` for first arg
 const publicClient = new Gdax.PublicClient('BTC-USD', apiURI);
 const authedClient = new Gdax.AuthenticatedClient(key, b64secret, passphrase, apiURI);
 
@@ -49,7 +47,7 @@ const getAccounts = () => {
  * @returns {Json} account
  */
 const getAccount = (currencyType) => {
-  const accountId = process.env[currencyType]
+  const accountId = sandbox ? process.env["SANDBOX_${currencyType}"] : process.env[currencyType]
 
   if(accountId) {
     authedClient.getAccount(accountId)

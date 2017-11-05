@@ -1,5 +1,6 @@
 const program = require('commander');
-// Require logic.js file and extract controller functions using JS destructuring assignment
+
+// Require app.js file and extract controller functions using JS destructuring assignment
 const { getProducts, getAccounts, getAccount } = require('./app');
 
 program
